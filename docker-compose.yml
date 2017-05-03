@@ -25,9 +25,12 @@ services:
       args:
         app_env: ${APP_ENV}
     volumes:
-      - ./keystone:/usr/src/app
+      - ./keystone/keystone.js:/usr/src/app/keystone.js
+      - ./keystone/models:/usr/src/app/models
+      - ./keystone/routes:/usr/src/app/routes
+      - ./keystone/updates:/usr/src/app/updates
     ports:
-      - "3000:8080"
+      - "3000:3000"
     links:
       - mongodb
     networks:

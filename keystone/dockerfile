@@ -1,14 +1,14 @@
-FROM node:6.9.4
+FROM node:argon
 
-ENV NODE_MODULE_INSTALLATION_PATH /usr/src/modules
-ENV NODE_PATH $NODE_MODULE_INSTALLATION_PATH/node_modules
-
-WORKDIR $NODE_MODULE_INSTALLATION_PATH
-
-RUN npm install dotenv@1.2.0 node-sass-middleware
-
+# Create app directory
+RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
+
+# Install app dependencies
+COPY package.json /usr/src/app/
+RUN npm install --quiet
+RUN npm install -g nodemon
 
 EXPOSE 3000
 
-CMD [ "node", "keystone.js" ]
+CMD [ "nodemon", "-L" ]
