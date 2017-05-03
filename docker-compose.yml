@@ -4,6 +4,14 @@ networks:
     driver: bridge
 
 services:
+  nginx:
+    build: ./nginx/
+    links:
+      - keystone
+    networks:
+      - app-tier
+    ports:
+      - "8080:80"
   mongodb:
     build: ./db
     volumes:
